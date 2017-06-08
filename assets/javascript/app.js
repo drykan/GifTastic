@@ -43,7 +43,7 @@ $("#submit").click(function addNewTopic() {
 function displayGifs() {
 	
 	selection = $(this).attr("data-name");
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + selection + "&api_key=dc6zaTOxFJmzC&limit=12";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + selection + "&api_key=dc6zaTOxFJmzC&limit=12";
 
 	$.ajax({
 	  url: queryURL,
@@ -56,7 +56,7 @@ function displayGifs() {
 			toggleGif = response.data[i].images.fixed_height_still.url;
 			var appendGif = "<div class='gif'>" + "<div class='rating'>Rating: " + response.data[i].rating + "</div><br>" + "<img src=" + toggleGif + ">" + "</div>";
 	 		$("#gifs").append(appendGif);
-		}	  
+		} 
 	});
 };
 
