@@ -7,6 +7,7 @@ var animated = [];
 //create original buttons
 var defaultBtns = function () {
 	$("#categories").html("");
+	$("#direction").hide();
 	for (var i=0; i < topics.length; i++) {
 		var appendBtns = "<button class='catBtn' data-name=" + topics[i] + ">" + topics[i] + "</button>";
 		$("#categories").append(appendBtns);
@@ -41,7 +42,7 @@ $("#submit").click(function addNewTopic() {
 //display gifs in the #gifs ID.
 
 function displayGifs() {
-	
+	$("#direction").show();
 	selection = $(this).attr("data-name");
 	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + selection + "&api_key=dc6zaTOxFJmzC&limit=10";
 
