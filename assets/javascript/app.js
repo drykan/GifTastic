@@ -56,7 +56,7 @@ function displayGifs() {
 			static[i] = response.data[i].images.fixed_height_still.url;
 			animated[i] = response.data[i].images.fixed_height.url;
 			var ratingStat = response.data[i].rating;
-			var appendGif = "<div class='gif'>" + "<img class='eric' data-name=" + static[i] + " data-attribute=" + animated[i] + " src=" + static[i] + ">" + "<div class='rating'>Rating: " + ratingStat.toUpperCase() + "</div>" + "</div>";
+			var appendGif = "<div class='gif'>" + "<img class='gifImg' data-static=" + static[i] + " data-animated=" + animated[i] + " src=" + static[i] + ">" + "<div class='rating'>Rating: " + ratingStat.toUpperCase() + "</div>" + "</div>";
 	 		$("#gifs").append(appendGif);
 		} 
 	});
@@ -67,17 +67,17 @@ function animToggle() {
 	console.log("Clicked Gif Class image");
 	var curSrc = $(this).attr('src');
 
-	if(curSrc === $(this).attr('data-name')) {
-		$(this).attr("src", $(this).attr('data-attribute'));
+	if(curSrc === $(this).attr('data-static')) {
+		$(this).attr("src", $(this).attr('data-animated'));
 	}
 	else {
-		$(this).attr("src", $(this).attr('data-name'));
+		$(this).attr("src", $(this).attr('data-static'));
 		console.log("Animated changed to Static");
 	}
 }
 
 $(document).on("click", ".catBtn", displayGifs);
-$(document).on("click", ".eric", animToggle);
+$(document).on("click", ".gifImg", animToggle);
 
 });
 
