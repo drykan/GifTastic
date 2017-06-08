@@ -2,8 +2,8 @@ $(document).ready(function() {
 
 var topics = [ "Greyhound", "Pug", "Bulldog", "Shih Tzu", "Shiba Inu", "Boxer Dog", "Corgie"];	//setup buttons for exisiting topics
 var selection;
-var toggleGif;
-
+var static = [];
+var animated = [];
 //create original buttons
 var defaultBtns = function () {
 	$("#categories").html("");
@@ -43,7 +43,7 @@ $("#submit").click(function addNewTopic() {
 function displayGifs() {
 	
 	selection = $(this).attr("data-name");
-	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + selection + "&api_key=dc6zaTOxFJmzC&limit=12";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + selection + "&api_key=dc6zaTOxFJmzC&limit=10";
 
 	$.ajax({
 	  url: queryURL,
@@ -53,28 +53,31 @@ function displayGifs() {
 		var giphyArray = response.data;
 		$("#gifs").empty();
 		for (var i=0; i < giphyArray.length; i++) {
-			toggleGif = response.data[i].images.fixed_height_still.url;
-			var appendGif = "<div class='gif'>" + "<div class='rating'>Rating: " + response.data[i].rating + "</div><br>" + "<img src=" + toggleGif + ">" + "</div>";
+			static[i] = response.data[i].images.fixed_height_still.url;
+			animated[i] = response.data[i].images.fixed_height.url;
+			var ratingStat = response.data[i].rating;
+			var appendGif = "<div class='gif'>" + "<img class='eric' data-name=" + static[i] + " data-attribute=" + animated[i] + " src=" + static[i] + ">" + "<div class='rating'>Rating: " + ratingStat.toUpperCase() + "</div>" + "</div>";
 	 		$("#gifs").append(appendGif);
 		} 
 	});
 };
 
 //When GIF is clicked start animation.
-// $(".gif").click(function() {
+function animToggle() {
+	console.log("Clicked Gif Class image");
+	var curSrc = $(this).attr('src');
 
-// 	if() {
-
-// 	}
-
-// 	toggleGif = response.data[i].images.fixed_height.url;
-// 	$(this).empty();
-// 	var appendGif = "<div class='rating'>Rating: " + response.data[i].rating + "</div><br>" + "<img src=" + toggleGif + ">";
-// 	$(".gifs").append(appendGif);
-// 	console.log("hey boiy");
-// });
+	if(curSrc === $(this).attr('data-name')) {
+		$(this).attr("src", $(this).attr('data-attribute'));
+	}
+	else {
+		$(this).attr("src", $(this).attr('data-name'));
+		console.log("Animated changed to Static");
+	}
+}
 
 $(document).on("click", ".catBtn", displayGifs);
+$(document).on("click", ".eric", animToggle);
 
 });
 
