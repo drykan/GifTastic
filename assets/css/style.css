@@ -3,6 +3,10 @@ body {
 	color: #fff;
 }
 
+img {
+	max-width: 100%;
+}
+
 .jumbotron {
 	background: steelblue;
 	color: #fff;
@@ -73,7 +77,18 @@ body {
 	background: #888;
 }
 
+@media screen and (max-width: 380px) {
 
+	.catBtn {
+		width: 45%;
+		min-width: initial;
+		margin: 0 5% 20px 0;
+	}
+
+	.catBtn:odd {
+		margin-right: 0;
+	}
+}
 
 
 
