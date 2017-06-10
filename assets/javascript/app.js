@@ -70,6 +70,7 @@ function animToggle() {
 
 	if(curSrc === $(this).attr('data-static')) {
 		$(this).attr("src", $(this).attr('data-animated'));
+		console.log("Animation Started");
 	}
 	else {
 		$(this).attr("src", $(this).attr('data-static'));
